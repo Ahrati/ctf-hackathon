@@ -1,6 +1,7 @@
 services:
   db:
     image: mariadb:10.11
+    container_name: DB_Container
     restart: always
     environment:
       - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}
@@ -13,6 +14,7 @@ services:
 
   ctfd:
     image: ctfd/ctfd:latest
+    container_name: CTFd_Container
     ports:
       - "8000:8000"
     environment:
@@ -26,6 +28,7 @@ services:
 
   app:
     build: ./app
+    container_name: AppContainer
     ports:
       - "3000:3000"
     environment:
