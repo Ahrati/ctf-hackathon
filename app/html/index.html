@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="hr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bun app</title>
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+
+<body>
+    <h3>To bude login</h3>
+
+    <div class="btn-group">
+        <button onclick="fetchAndRender('/api/challenges', 'Izazovi (Challenges)')">Challenges</button>
+        <button onclick="fetchAndRender('/api/users', 'Korisnici (Users)')">Users</button>
+        <button onclick="fetchAndRender('/api/teams', 'Timovi (Teams)')">Teams</button>
+        <button onclick="fetchAndRender('/api/scoreboard', 'Poredak (Scoreboard)')">Scoreboard</button>
+        <button onclick="fetchAndRender('/api/db', 'Status Baze')">Baza</button>
+    </div>
+
+    <div class="title-row">
+        <h4 id="tableTitle">Prikaz podataka:</h4>
+        <span id="itemCount" style="color: #888; font-size: 13px;"></span>
+    </div>
+
+    <div id="tableWrapper" class="table-container">
+        <div class="empty-msg">// Klikni na bilo koji gumb iznad za učitavanje tablice...</div>
+    </div>
+
+    <details>
+        <summary>Prikaži sirovi JSON odgovor</summary>
+        <pre id="rawOutput">// Ovdje će biti sirovi JSON...</pre>
+    </details>
+
+    <script>
+        async function fetchAndRender(url, naziv) {
+            const tableTitle = document.getElementById("tableTitle");
+            const itemCount = document.getElementById("itemCount");
+            const wrapper = document.getElementById("tableWrapper");
+            const raw = document.getElementById("rawOutput");
+
+            tableTitle.textContent = naziv;
+            itemCount.textContent = "Učitavam...";
+            wrapper.innerHTML = `<div class="empty-msg">Učitavam podatke s ${url}...</div>`;
+
+            try {
+                const res = await fetch(url);
+                const json = await res.json();
+                raw.textContent = JSON.stringify(json, null, 2);
+
+                if (json.error) {
+                    wrapper.innerHTML = `<div class="empty-msg" style="color: #f87171;">Greška: ${json.error}</div>`;
+                    itemCount.textContent = "Greška";
+                    return;
+                }
+
+                // 1. Ako je odgovor lista (CTFd vraća { success: true, data: [...] })
+                if (Array.isArray(json.data)) {
+                    const items = json.data;
+                    itemCount.textContent = `Ukupno: ${items.length}`;
+
+                    if (items.length === 0) {
+                        wrapper.innerHTML = `<div class="empty-msg">Nema zapisa (0 stavki).</div>`;
+                        return;
+                    }
+
+                    // Ključevi koje ne želimo prikazivati u tablici
+                    const ignoredKeys = ["template", "script"];
+
+                    // Uzmi nazive stupaca iz prvog objekta, preskoči objekte i ignorirane ključeve
+                    const keys = Object.keys(items[0]).filter(
+                        k => typeof items[0][k] !== "object" && !ignoredKeys.includes(k)
+                    );
+
+                    let tableHtml = "<table><thead><tr>";
+                    keys.forEach(k => tableHtml += `<th>${k}</th>`);
+                    tableHtml += "</tr></thead><tbody>";
+
+                    items.forEach(item => {
+                        tableHtml += "<tr>";
+                        keys.forEach(k => {
+                            const val = item[k] !== null && item[k] !== undefined ? item[k] : "-";
+                            tableHtml += `<td>${val}</td>`;
+                        });
+                        tableHtml += "</tr>";
+                    });
+
+                    tableHtml += "</tbody></table>";
+                    wrapper.innerHTML = tableHtml;
+                    return;
+                }
+
+                // 2. Ako je običan objekt (npr. /api/db test)
+                const entries = Object.entries(json);
+                itemCount.textContent = "";
+                let tableHtml = "<table><thead><tr><th>Polje</th><th>Vrijednost</th></tr></thead><tbody>";
+                entries.forEach(([key, val]) => {
+                    const displayVal = typeof val === "object" ? JSON.stringify(val) : val;
+                    tableHtml += `<tr><td><strong>${key}</strong></td><td>${displayVal}</td></tr>`;
+                });
+                tableHtml += "</tbody></table>";
+                wrapper.innerHTML = tableHtml;
+
+            } catch (err) {
+                wrapper.innerHTML = `<div class="empty-msg" style="color: #f87171;">Došlo je do greške: ${err.message}</div>`;
+                raw.textContent = "Greška: " + err.message;
+                itemCount.textContent = "Greška";
+            }
+        }
+    </script>
+</body>
+
+</html>
