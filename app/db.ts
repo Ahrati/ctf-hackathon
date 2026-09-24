@@ -13,7 +13,7 @@ export async function initDb(retries = 15, delayMs = 2000): Promise<void> {
     while (retries > 0) {
         try {
             const connection = await pool.getConnection();
-            console.log("💾 Uspješno spojen na MariaDB bazu podataka!");
+            console.log("Uspješno spojen na MariaDB bazu podataka!");
 
             // Tablice za aplikaciju
             await connection.query(`

@@ -46,7 +46,7 @@ const server = Bun.serve({
             }
         },
 
-        // CTFd API Proxy rute
+        // CTFd API rute
         "/api/challenges": async () => {
             try {
                 const data = await fetchCtfd("challenges");
