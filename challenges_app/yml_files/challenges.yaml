@@ -1,7 +1,7 @@
-Challenges:
-- title:
-  description:
-  points:
-  flag:
-  filename:
-  path:
+- id: 1
+  title: Reverse
+  description: blablablabla
+  points: 100
+  flag: xjsihdaf7
+  filename: reverse.apk
+  path: ./data/reverse.apk

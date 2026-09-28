@@ -1,0 +1,30 @@
+<html lang="hr">
+<head>
+    <meta charset="UTF-8">
+</head>
+<body>
+    <h3>Challenges</h3>
+    <div id="challenges_list"></div>
+    <script>
+        async function loadChallenges() {
+        const response = await fetch('/api/challenges');
+      
+        const challenges = await response.json();
+        if (!Array.isArray(challenges)) {
+            console.error("Expected an array but received:", data);
+            return;
+        }
+
+        const container = document.getElementById('challenges_list');
+        container.innerHTML = challenges.map(ch => `
+            <div style="border: 1px solid #ccc; margin: 10px; padding: 10px;">
+                <h3>${ch.title}</h3>
+                <p><strong>Due:</strong> ${ch.description}</p>
+                <p>${ch.points}</p>
+            </div>
+        `).join('');
+    }
+    loadChallenges();
+    </script>
+</body>
+</html>

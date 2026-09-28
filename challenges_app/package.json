@@ -9,7 +9,10 @@
   "peerDependencies": {
     "typescript": "^5.9.3"
   },
-  "scripts":{
+  "scripts": {
     "start": "bun run index.ts"
+  },
+  "dependencies": {
+    "yaml": "^2.9.1"
   }
 }
