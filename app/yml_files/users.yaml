@@ -1,0 +1,7 @@
+Users:
+- username: tim1
+  password: proba123
+  role: user
+- username: admin1
+  password: lozinka
+  role: admin
