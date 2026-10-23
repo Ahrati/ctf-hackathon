@@ -4,6 +4,7 @@
 
 docker-compose is required.
 
+(run from project folder)
 ```bash
     docker compose up -d --build
 ```
