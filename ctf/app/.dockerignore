@@ -1,7 +1,0 @@
-node_modules
-Dockerfile
-.dockerignore
-
-# Never bake local environment secrets into the app image.
-.env
-.env.*

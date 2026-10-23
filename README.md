@@ -11,19 +11,19 @@ docker-compose is required.
 
 then connect to localhost:5473
 
-there are two preset accounts for personal solving.
+to add users to the system:
 
 Administrator
 ```
-    username: admin
-    password: adminpassword
+    docker compose exec app bun run user:add -- USERNAME admin "ADMIN NAME"
 ```
 
 Contestant
 ```
-    username: contestant
-    password: contestantpassword
+    docker compose exec app bun run user:add -- USERNAME team "TEAM NAME"
 ```
+
+after which you are prompted to give it a password.
 
 to shut it down:
 ```bash
