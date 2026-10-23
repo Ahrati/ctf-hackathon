@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>DECODE</title>
+
+    <link rel="stylesheet" href="/css/style.css">
+    <script src="/js/mutation.js" defer></script>
+</head>
+<body>
+<header class="topbar">
+    <a class="brand-mark" href="/challenges">
+        FOI<span> / DECODE</span>
+    </a>
+
+    <div class="topbar-right">
+        <a href="/challenges" class="text-link">Challenges</a>
+    </div>
+</header>
+
+<main class="page-wrap">
+    <section class="panel">
+        <div class="detail-heading">
+            <div>
+                <p class="eyebrow">PASSWORD HISTORY</p>
+                <h2>Previous passwords</h2>
+            </div>
+        </div>
+
+        <p id="history-message" class="muted" role="status">
+            Loading password history...
+        </p>
+
+        <ol id="password-history" class="mutation-list"></ol>
+    </section>
+</main>
+</body>
+</html>

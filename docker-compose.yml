@@ -1,0 +1,45 @@
+services:
+  db:
+    image: mariadb:10.11
+    container_name: DB_Container
+    restart: unless-stopped
+    environment:
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD:?Set MYSQL_ROOT_PASSWORD in .env}
+      MYSQL_USER: ${MYSQL_USER:?Set MYSQL_USER in .env}
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD:?Set MYSQL_PASSWORD in .env}
+      MYSQL_DATABASE: ${MYSQL_DATABASE:?Set MYSQL_DATABASE in .env}
+    volumes:
+      - .data/mysql:/var/lib/mysql
+    command: [mysqld, --character-set-server=utf8mb4, --collation-server=utf8mb4_unicode_ci, --wait_timeout=28800, --log-warnings=0]
+    healthcheck:
+      test: ["CMD", "healthcheck.sh", "--connect", "--innodb_initialized"]
+      interval: 5s
+      timeout: 5s
+      retries: 30
+
+  app:
+    build: ./app
+    container_name: AppContainer
+    restart: unless-stopped
+    ports:
+      - "5473:3000"
+    volumes:
+      - ./backups:/app/backups
+      - ./app/public:/usr/src/app/public:ro
+    environment:
+      PORT: ${PORT:-3000}
+      HOST: 0.0.0.0
+      SESSION_DAYS: ${SESSION_DAYS:-12}
+      DATABASE_URL: mysql://${MYSQL_USER}:${MYSQL_PASSWORD}@db:3306/${MYSQL_DATABASE}
+    depends_on:
+      db:
+        condition: service_healthy
+
+  sudoku:
+    image: nginx:alpine
+    container_name: ctf-sudoku
+    restart: unless-stopped
+    ports:
+      - "6737:80"
+    volumes:
+      - ./sudoku-site:/usr/share/nginx/html:ro

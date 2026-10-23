@@ -1,0 +1,34 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Challenges · CTF Event</title><link rel="stylesheet" href="/css/style.css">
+  <script src="/js/challenges.js" defer></script>
+</head>
+<body>
+  <header class="topbar">
+    <a class="brand-mark" href="/challenges">CTF<span> / EVENT</span></a>
+    <div class="topbar-right"><span id="current-user" class="user-chip">Team session</span><a class="text-link" href="/tv" target="_blank" rel="noopener">Live board ↗</a><button class="button ghost small" id="logout-button">Sign out</button></div>
+  </header>
+  <main class="page-wrap">
+    <section class="page-heading">
+      <div><p class="eyebrow">MISSION CONTROL</p><h1>Challenges</h1><p class="muted">Six tasks. One team account. Every solve counts.</p></div>
+      <div class="metric-panel"><span class="metric-label">YOUR PROGRESS</span><strong id="progress-count">0 / 6</strong><span class="muted small-text">captured flags</span></div>
+    </section>
+    <div id="challenge-grid" class="challenge-grid" aria-live="polite"></div>
+    <section id="challenge-detail" class="panel challenge-detail hidden">
+      <a class="text-link back-link" href="/challenges">← All challenges</a>
+      <div class="detail-heading"><div><p class="eyebrow" id="challenge-label">CHALLENGE</p><h2 id="challenge-title">Loading challenge…</h2></div><span id="challenge-status" class="status-pill">OPEN</span></div>
+      <div id="challenge-data" class="challenge-copy"></div>
+      <a id="challenge-file" class="file-link hidden" href="#" download><span aria-hidden="true">↧</span> Download challenge file</a>
+      <form id="flag-form" class="flag-form">
+        <label for="flag-input">Submit 8-character flag</label>
+        <div class="flag-input-row"><input id="flag-input" name="flag" minlength="8" maxlength="8" autocomplete="off" spellcheck="false" placeholder="XXXXXXXX" required><button id="submit-flag" class="button primary" type="submit">Capture flag</button></div>
+        <p id="flag-message" class="form-message" role="status"></p>
+      </form>
+      <p id="solve-summary" class="solve-summary hidden"></p>
+    </section>
+    <section class="panel note-panel"><strong>Team account note</strong><p>Multiple teammates may be signed in at once using the same team credentials. Solves and points are shared across the team.</p></section>
+  </main>
+</body>
+</html>

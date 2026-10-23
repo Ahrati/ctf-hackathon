@@ -1,0 +1,21 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>DECODE</title><link rel="stylesheet" href="/css/style.css">
+  <script src="/js/login.js" defer></script>
+</head>
+<body class="login-body">
+  <main class="login-shell">
+    <div class="brand-mark">FOI<span> / DECODE</span></div>
+    <form id="login-form" class="panel login-form">
+      <label for="username">Username</label>
+      <input id="username" name="username" autocomplete="username" required maxlength="191" autofocus>
+      <label for="password">Password</label>
+      <input id="password" name="password" type="password" autocomplete="current-password" required maxlength="1024">
+      <button class="button primary full" type="submit">Sign in <span aria-hidden="true">→</span></button>
+      <p id="login-message" class="form-message" role="status"></p>
+    </form>
+  </main>
+</body>
+</html>

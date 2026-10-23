@@ -1,0 +1,27 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>DECODE</title><link rel="stylesheet" href="/css/style.css">
+  <script src="/js/challenges.js" defer></script>
+</head>
+<body>
+  <header class="topbar">
+    <a class="brand-mark" href="/challenges">FOI<span> / DECODE</span></a>
+    <div class="topbar-right"><span id="current-user" class="user-chip">...</span><button class="button ghost small" id="logout-button">Sign out</button></div>
+  </header>
+  <main class="page-wrap">
+    <div id="challenge-grid" class="challenge-grid" aria-live="polite"></div>
+    <section id="challenge-detail" class="panel challenge-detail hidden">
+      <div class="detail-heading"><div><p class="eyebrow" id="challenge-label">CHALLENGE</p><h2 id="challenge-title">Loading challenge…</h2></div><span id="challenge-status" class="status-pill">OPEN</span></div>
+      <div id="challenge-data" class="challenge-copy"></div>
+      <a id="challenge-file" class="file-link hidden" href="#" download><span aria-hidden="true">↧</span> Download </a>
+      <form id="flag-form" class="flag-form">
+        <div class="flag-input-row"><input id="flag-input" name="flag" minlength="8" maxlength="8" autocomplete="off" spellcheck="false" placeholder="XXXXXXXX" required><button id="submit-flag" class="button primary" type="submit">Submit</button></div>
+        <p id="flag-message" class="form-message" role="status"></p>
+      </form>
+      <p id="solve-summary" class="solve-summary hidden"></p>
+    </section>
+  </main>
+</body>
+</html>

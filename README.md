@@ -1,13 +1,30 @@
 # ctf
 
-To install dependencies:
+### Startup
+
+docker-compose is required.
 
 ```bash
-bun install
+    docker compose up -d --build
 ```
 
-To run:
+then connect to localhost:5473
 
+there are two preset accounts for personal solving.
+
+Administrator
+```
+    username: admin
+    password: adminpassword
+```
+
+Contestant
+```
+    username: contestant
+    password: contestantpassword
+```
+
+to shut it down:
 ```bash
-bun run 
+    docker compose down
 ```

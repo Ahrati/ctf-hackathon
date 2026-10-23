@@ -1,0 +1,2 @@
+title,data,file,flag
+"Mutation","Na putanji /mutation se nalazi flag koji tražite, nažalost je flag zaštićen lozinkom. Pomoću query-a 'pass' možete slati stranici svoju lozinku i ako je točna vratit će vam flag! Mali problem je što se lozinka mijenja svakih 750ms... Za svaki slučaj omogučili smo vam da na toj putanji bez query-a možete vidjeti prošle lozinke koje su radile, ako će vam to išta pomoći sa potragom.","/files/Mutation.zip","yIoBNGyg"
