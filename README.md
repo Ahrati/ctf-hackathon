@@ -29,3 +29,9 @@ to shut it down:
 ```bash
     docker compose down
 ```
+
+### Leaderboard
+
+```
+    localhost:5473/tv
+```
